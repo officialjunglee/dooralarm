@@ -1,0 +1,31 @@
+#include <SoftwareSerial.h>
+SoftwareSerial esp8266(2, 3);
+int a1=0;
+int a2=0;
+void setup() 
+{
+ pinMode(12, INPUT);
+ pinMode(11, OUTPUT);
+ digitalWrite(11, LOW);
+ esp8266.begin(9600);
+ Serial.begin(9600);
+ Serial.println("Getting In..");    
+}
+
+void loop() 
+{
+  a1=digitalRead(12);
+if(a1==1)
+{
+digitalWrite(11, HIGH);
+esp8266.println("#A*");
+Serial.println("#A*");
+while(1);  
+}
+char c;  
+ if(esp8266.available())
+ {
+ c=esp8266.read();
+ Serial.print((String)(c));
+ } 
+ }
